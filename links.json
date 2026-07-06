@@ -1,0 +1,32 @@
+[
+  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "xLSTM: Extended Long Short-Term Memory", "meta": "Beck et al. · NeurIPS 2024", "tag": "2405.04517", "url": "https://arxiv.org/abs/2405.04517" },
+  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "xLSTM 7B: A Recurrent LLM for Fast and Efficient Inference", "meta": "Beck et al. · ICML 2025", "tag": "2503.13427", "url": "https://arxiv.org/abs/2503.13427" },
+  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "xLSTM Scaling Laws: Competitive Performance with Linear Time-Complexity", "meta": "Beck et al. · ICLR 2026", "tag": "2510.02228", "url": "https://arxiv.org/abs/2510.02228" },
+  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "Effective Distillation to Hybrid xLSTM Architectures", "meta": "Hauzenberger, Schmidinger et al. · ICML 2026", "tag": "2603.15590", "url": "https://arxiv.org/abs/2603.15590" },
+  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "On Subquadratic Architectures: From Applications to Principles", "meta": "Hartl, Zólyomi et al. · preprint 2026", "tag": "2606.12364", "url": "https://arxiv.org/abs/2606.12364" },
+  { "model": "xlstm", "type": "code", "icon": "github", "title": "xLSTM source (PyTorch)", "meta": "NX-AI/xlstm", "tag": "GitHub", "url": "https://github.com/NX-AI/xlstm" },
+  { "model": "xlstm", "type": "code", "icon": "github", "title": "xLSTM source (JAX)", "meta": "NX-AI/xlstm-jax", "tag": "GitHub", "url": "https://github.com/NX-AI/xlstm-jax" },
+
+  { "model": "tirex", "type": "paper", "icon": "arxiv", "title": "TiRex: Zero-Shot Forecasting Across Long and Short Horizons with Enhanced In-Context Learning", "meta": "Auer et al. · NeurIPS 2025", "tag": "2505.23719", "url": "https://arxiv.org/abs/2505.23719" },
+  { "model": "tirex", "type": "paper", "icon": "arxiv", "title": "Pre-trained Forecasting Models: Strong Zero-Shot Feature Extractors for Time Series Classification", "meta": "Auer, Klotz, Böck, Hochreiter · NeurIPS 2025 Workshop", "tag": "2510.26777", "url": "https://arxiv.org/abs/2510.26777" },
+  { "model": "tirex", "type": "code", "icon": "book", "title": "TiRex documentation", "meta": "Read the Docs", "tag": "Docs", "url": "https://nx-ai.github.io/tirex/" },
+  { "model": "tirex", "type": "code", "icon": "github", "title": "TiRex source", "meta": "NX-AI/tirex", "tag": "GitHub", "url": "https://github.com/NX-AI/tirex" },
+  { "model": "tirex", "type": "code", "icon": "docker", "title": "TiRex Docker image", "meta": "Inference container", "tag": "Docker", "url": "https://github.com/NX-AI/tirex/blob/main/inference/README.md" },
+  { "model": "tirex", "type": "code", "icon": "jupyter", "title": "Quick start notebook", "meta": "Jupyter", "tag": "Notebook", "url": "https://github.com/NX-AI/tirex/blob/main/examples/quick_start_tirex.ipynb" },
+  { "model": "tirex", "type": "code", "icon": "huggingface", "title": "TiRex live demo", "meta": "Hugging Face Spaces", "tag": "Demo", "url": "https://huggingface.co/spaces/NX-AI/TiRex-demo" },
+  { "model": "tirex", "type": "code", "icon": "package", "title": "TiRex on FLECS", "meta": "Marketplace listing", "tag": "FLECS", "url": "https://flecs.tech/marketplace/product/tirex-zero-shot-time-series-forecasting/" },
+  { "model": "tirex", "type": "code", "icon": "article", "title": "TiRex on the edge", "meta": "Same article, cross-posted",
+    "links": [
+      { "tag": "NXAI", "url": "https://www.nx-ai.com/en/news/tirex-on-the-edge" },
+      { "tag": "Hugging Face", "url": "https://huggingface.co/blog/BobWue/edge" }
+    ]
+  },
+
+  { "model": "vision-lstm", "type": "paper", "icon": "arxiv", "title": "Vision-LSTM: xLSTM as Generic Vision Backbone", "meta": "Alkin et al. · ICLR 2025", "tag": "2406.04303", "url": "https://arxiv.org/abs/2406.04303" },
+  { "model": "vision-lstm", "type": "code", "icon": "github", "title": "Vision-LSTM source", "meta": "NX-AI/vision-lstm", "tag": "GitHub", "url": "https://github.com/NX-AI/vision-lstm" },
+
+  { "model": "bio-xlstm", "type": "paper", "icon": "arxiv", "title": "Bio-xLSTM: Generative Modeling, Representation and In-Context Learning of Biological and Chemical Sequences", "meta": "Schmidinger et al. · ICLR 2025", "tag": "2411.04165", "url": "https://arxiv.org/abs/2411.04165" },
+
+  { "model": "lram", "type": "paper", "icon": "arxiv", "title": "A Large Recurrent Action Model: xLSTM Enables Fast Inference for Robotics Tasks", "meta": "Schmied et al. · ICML 2025", "tag": "2410.22391", "url": "https://arxiv.org/abs/2410.22391" },
+  { "model": "lram", "type": "code", "icon": "github", "title": "LRAM source", "meta": "ml-jku/LRAM (JKU)", "tag": "GitHub", "url": "https://github.com/ml-jku/LRAM" }
+]

@@ -11,6 +11,7 @@
 
   { "model": "tirex", "type": "paper", "icon": "arxiv", "title": "TiRex-2: Generalizing TiRex to Multivariate Data and Streaming", "meta": "Podest et al. · preprint 2026", "tag": "2607.01204", "url": "https://arxiv.org/abs/2607.01204" },
   { "model": "tirex", "type": "code", "icon": "github", "title": "TiRex-2 source", "meta": "NX-AI/tirex-2", "tag": "GitHub", "url": "https://github.com/NX-AI/tirex-2" },
+  { "model": "tirex", "type": "code", "icon": "docker", "title": "TiRex-2 Docker image", "meta": "Inference container", "tag": "Docker", "url": "https://github.com/NX-AI/tirex-2/blob/main/inference/README.md" },
   { "model": "tirex", "type": "code", "icon": "jupyter", "title": "TiRex-2 Getting Started notebook", "meta": "Jupyter", "tag": "Notebook", "url": "https://github.com/NX-AI/tirex-2/blob/main/examples/getting_started.ipynb" },
   { "model": "tirex", "type": "paper", "icon": "arxiv", "title": "TiRex: Zero-Shot Forecasting Across Long and Short Horizons with Enhanced In-Context Learning", "meta": "Auer et al. · NeurIPS 2025", "tag": "2505.23719", "url": "https://arxiv.org/abs/2505.23719" },
   { "model": "tirex", "type": "paper", "icon": "arxiv", "title": "Pre-trained Forecasting Models: Strong Zero-Shot Feature Extractors for Time Series Classification", "meta": "Auer, Klotz, Böck, Hochreiter · NeurIPS 2025 Workshop", "tag": "2510.26777", "url": "https://arxiv.org/abs/2510.26777" },

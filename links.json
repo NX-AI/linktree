@@ -1,21 +1,21 @@
 [
-  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "xLSTM: Extended Long Short-Term Memory", "meta": "Beck et al. · NeurIPS 2024", "tag": "2405.04517", "url": "https://arxiv.org/abs/2405.04517" },
-  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "xLSTM 7B: A Recurrent LLM for Fast and Efficient Inference", "meta": "Beck et al. · ICML 2025", "tag": "2503.13427", "url": "https://arxiv.org/abs/2503.13427" },
-  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "Tiled Flash Linear Attention: More Efficient Linear RNN and xLSTM Kernels", "meta": "Beck et al. · NeurIPS 2025", "tag": "2503.14376", "url": "https://arxiv.org/abs/2503.14376" },
-  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "xLSTM Scaling Laws: Competitive Performance with Linear Time-Complexity", "meta": "Beck et al. · ICLR 2026", "tag": "2510.02228", "url": "https://arxiv.org/abs/2510.02228" },
-  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "FlashRNN: I/O-Aware Optimization of Traditional RNNs on modern hardware", "meta": "Pöppel et al. · ICLR 2026", "tag": "2412.07752", "url": "https://arxiv.org/abs/2412.07752" },
-  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "Effective Distillation to Hybrid xLSTM Architectures", "meta": "Hauzenberger et al. · ICML 2026", "tag": "2603.15590", "url": "https://arxiv.org/abs/2603.15590" },
-  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "On Subquadratic Architectures: From Applications to Principles", "meta": "Hartl et al. · preprint 2026", "tag": "2606.12364", "url": "https://arxiv.org/abs/2606.12364" },
+  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "xLSTM: Extended Long Short-Term Memory", "meta": "Beck et al. · NeurIPS 2024", "tag": "2405.04517", "url": "https://arxiv.org/abs/2405.04517", "date": "2024-12", "venue": "NeurIPS" },
+  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "xLSTM 7B: A Recurrent LLM for Fast and Efficient Inference", "meta": "Beck et al. · ICML 2025", "tag": "2503.13427", "url": "https://arxiv.org/abs/2503.13427", "date": "2025-07", "venue": "ICML" },
+  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "Tiled Flash Linear Attention: More Efficient Linear RNN and xLSTM Kernels", "meta": "Beck et al. · NeurIPS 2025", "tag": "2503.14376", "url": "https://arxiv.org/abs/2503.14376", "date": "2025-12", "venue": "NeurIPS" },
+  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "xLSTM Scaling Laws: Competitive Performance with Linear Time-Complexity", "meta": "Beck et al. · ICLR 2026", "tag": "2510.02228", "url": "https://arxiv.org/abs/2510.02228", "date": "2026-04", "venue": "ICLR" },
+  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "FlashRNN: I/O-Aware Optimization of Traditional RNNs on modern hardware", "meta": "Pöppel et al. · ICLR 2025", "tag": "2412.07752", "url": "https://arxiv.org/abs/2412.07752", "date": "2025-04", "venue": "ICLR" },
+  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "Effective Distillation to Hybrid xLSTM Architectures", "meta": "Hauzenberger et al. · ICML 2026", "tag": "2603.15590", "url": "https://arxiv.org/abs/2603.15590", "date": "2026-07", "venue": "ICML" },
+  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "On Subquadratic Architectures: From Applications to Principles", "meta": "Hartl et al. · preprint 2026", "tag": "2606.12364", "url": "https://arxiv.org/abs/2606.12364", "date": "2026-06", "venue": "preprint" },
   { "model": "xlstm", "type": "code", "icon": "github", "title": "xLSTM source (PyTorch)", "meta": "NX-AI/xlstm", "tag": "GitHub", "url": "https://github.com/NX-AI/xlstm" },
   { "model": "xlstm", "type": "code", "icon": "github", "title": "xLSTM source (JAX)", "meta": "NX-AI/xlstm-jax", "tag": "GitHub", "url": "https://github.com/NX-AI/xlstm-jax" },
 
-  { "model": "tirex", "type": "paper", "icon": "arxiv", "title": "TiRex-2: Generalizing TiRex to Multivariate Data and Streaming", "meta": "Podest et al. · preprint 2026", "tag": "2607.01204", "url": "https://arxiv.org/abs/2607.01204" },
+  { "model": "tirex", "type": "paper", "icon": "arxiv", "title": "TiRex-2: Generalizing TiRex to Multivariate Data and Streaming", "meta": "Podest et al. · preprint 2026", "tag": "2607.01204", "url": "https://arxiv.org/abs/2607.01204", "date": "2026-07", "venue": "preprint" },
   { "model": "tirex", "type": "code", "icon": "github", "title": "TiRex-2 source", "meta": "NX-AI/tirex-2", "tag": "GitHub", "url": "https://github.com/NX-AI/tirex-2" },
   { "model": "tirex", "type": "code", "icon": "docker", "title": "TiRex-2 Docker image", "meta": "Inference container", "tag": "Docker", "url": "https://github.com/NX-AI/tirex-2/blob/main/inference/README.md" },
   { "model": "tirex", "type": "code", "icon": "jupyter", "title": "TiRex-2 Getting Started notebook", "meta": "Jupyter", "tag": "Notebook", "url": "https://github.com/NX-AI/tirex-2/blob/main/examples/getting_started.ipynb" },
   { "model": "tirex", "type": "code", "icon": "huggingface", "title": "TiRex-2 live demo", "meta": "Hugging Face Spaces", "tag": "Demo", "url": "https://huggingface.co/spaces/NX-AI/TiRex-2-demo" },
-  { "model": "tirex", "type": "paper", "icon": "arxiv", "title": "TiRex: Zero-Shot Forecasting Across Long and Short Horizons with Enhanced In-Context Learning", "meta": "Auer et al. · NeurIPS 2025", "tag": "2505.23719", "url": "https://arxiv.org/abs/2505.23719" },
-  { "model": "tirex", "type": "paper", "icon": "arxiv", "title": "Pre-trained Forecasting Models: Strong Zero-Shot Feature Extractors for Time Series Classification", "meta": "Auer et al. · NeurIPS 2025 Workshop", "tag": "2510.26777", "url": "https://arxiv.org/abs/2510.26777" },
+  { "model": "tirex", "type": "paper", "icon": "arxiv", "title": "TiRex: Zero-Shot Forecasting Across Long and Short Horizons with Enhanced In-Context Learning", "meta": "Auer et al. · NeurIPS 2025", "tag": "2505.23719", "url": "https://arxiv.org/abs/2505.23719", "date": "2025-12", "venue": "NeurIPS" },
+  { "model": "tirex", "type": "paper", "icon": "arxiv", "title": "Pre-trained Forecasting Models: Strong Zero-Shot Feature Extractors for Time Series Classification", "meta": "Auer et al. · NeurIPS 2025 Workshop", "tag": "2510.26777", "url": "https://arxiv.org/abs/2510.26777", "date": "2025-12", "venue": "NeurIPS" },
   { "model": "tirex", "type": "code", "icon": "book", "title": "TiRex documentation", "meta": "Read the Docs", "tag": "Docs", "url": "https://nx-ai.github.io/tirex/" },
   { "model": "tirex", "type": "code", "icon": "github", "title": "TiRex source", "meta": "NX-AI/tirex", "tag": "GitHub", "url": "https://github.com/NX-AI/tirex" },
   { "model": "tirex", "type": "code", "icon": "docker", "title": "TiRex Docker image", "meta": "Inference container", "tag": "Docker", "url": "https://github.com/NX-AI/tirex/blob/main/inference/README.md" },
@@ -29,14 +29,14 @@
     ]
   },
 
-  { "model": "vision-lstm", "type": "paper", "icon": "arxiv", "title": "Vision-LSTM: xLSTM as Generic Vision Backbone", "meta": "Alkin et al. · ICLR 2025", "tag": "2406.04303", "url": "https://arxiv.org/abs/2406.04303" },
+  { "model": "vision-lstm", "type": "paper", "icon": "arxiv", "title": "Vision-LSTM: xLSTM as Generic Vision Backbone", "meta": "Alkin et al. · ICLR 2025", "tag": "2406.04303", "url": "https://arxiv.org/abs/2406.04303", "date": "2025-04", "venue": "ICLR" },
   { "model": "vision-lstm", "type": "code", "icon": "github", "title": "Vision-LSTM source", "meta": "NX-AI/vision-lstm", "tag": "GitHub", "url": "https://github.com/NX-AI/vision-lstm" },
 
-  { "model": "bio-xlstm", "type": "paper", "icon": "arxiv", "title": "Bio-xLSTM: Generative Modeling, Representation and In-Context Learning of Biological and Chemical Sequences", "meta": "Schmidinger et al. · ICLR 2025", "tag": "2411.04165", "url": "https://arxiv.org/abs/2411.04165" },
+  { "model": "bio-xlstm", "type": "paper", "icon": "arxiv", "title": "Bio-xLSTM: Generative Modeling, Representation and In-Context Learning of Biological and Chemical Sequences", "meta": "Schmidinger et al. · ICLR 2025", "tag": "2411.04165", "url": "https://arxiv.org/abs/2411.04165", "date": "2025-04", "venue": "ICLR" },
   { "model": "bio-xlstm", "type": "code", "icon": "github", "title": "DNA-xLSTM source", "meta": "ml-jku/DNA-xLSTM (JKU)", "tag": "GitHub", "url": "https://github.com/ml-jku/DNA-xLSTM" },
   { "model": "bio-xlstm", "type": "code", "icon": "github", "title": "Prot-xLSTM source", "meta": "ml-jku/Prot-xLSTM (JKU)", "tag": "GitHub", "url": "https://github.com/ml-jku/Prot-xLSTM" },
   { "model": "bio-xlstm", "type": "code", "icon": "github", "title": "Chem-xLSTM source", "meta": "ml-jku/Chem-xLSTM (JKU)", "tag": "GitHub", "url": "https://github.com/ml-jku/Chem-xLSTM" },
 
-  { "model": "lram", "type": "paper", "icon": "arxiv", "title": "A Large Recurrent Action Model: xLSTM Enables Fast Inference for Robotics Tasks", "meta": "Schmied et al. · ICML 2025", "tag": "2410.22391", "url": "https://arxiv.org/abs/2410.22391" },
+  { "model": "lram", "type": "paper", "icon": "arxiv", "title": "A Large Recurrent Action Model: xLSTM Enables Fast Inference for Robotics Tasks", "meta": "Schmied et al. · ICML 2025", "tag": "2410.22391", "url": "https://arxiv.org/abs/2410.22391", "date": "2025-07", "venue": "ICML" },
   { "model": "lram", "type": "code", "icon": "github", "title": "LRAM source", "meta": "ml-jku/LRAM (JKU)", "tag": "GitHub", "url": "https://github.com/ml-jku/LRAM" }
 ]

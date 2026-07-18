@@ -32,6 +32,10 @@
     --icon-docker:#2496ED;
     --icon-jupyter:#F37626;
     --icon-linkedin:#0A66C2;
+    --venue-neurips:#B48CFF;
+    --venue-iclr:#FF9F5A;
+    --venue-icml:#4ADE80;
+    --venue-preprint:#888888;
   }
 
   /* Light theme: teal must darken for contrast on white, per brand alt palette (#0B8A78 / #00766B) */
@@ -45,9 +49,15 @@
     --border:#E4E4E0;
     --hover:#F1F1EE;
     --icon-github:#181717;
+    --venue-neurips:#7C3AED;
+    --venue-iclr:#C2610A;
+    --venue-icml:#15803D;
+    --venue-preprint:#6B6B6B;
   }
 
   *{ box-sizing:border-box; }
+
+  [hidden]{ display:none !important; }
 
   html,body{
     margin:0;
@@ -161,7 +171,7 @@
     transform: translateY(-1px);
   }
 
-  .theme-toggle{
+  .pill-toggle{
     flex-shrink:0;
     display:flex;
     align-items:center;
@@ -172,7 +182,7 @@
     padding: 4px;
   }
 
-  .theme-toggle button{
+  .pill-toggle button{
     font-family:inherit;
     font-size: 12px;
     font-weight:600;
@@ -189,12 +199,12 @@
     transition: background .15s ease, color .15s ease;
   }
 
-  .theme-toggle button.active{
+  .pill-toggle button.active{
     background: var(--teal);
     color: var(--bg);
   }
 
-  .theme-toggle svg{ width:14px; height:14px; }
+  .pill-toggle svg{ width:14px; height:14px; }
 
   .controls{
     position: sticky;
@@ -204,6 +214,17 @@
     padding-top: 12px;
     margin: 0 0 8px;
   }
+
+  .controls-top{
+    display:flex;
+    gap: 12px;
+    align-items:center;
+    margin-bottom: 12px;
+  }
+
+  .controls-top .search-box{ flex:1; margin-bottom:0; }
+
+  #orientation-toggle{ margin-bottom: 12px; }
 
   .search-box{
     position: relative;
@@ -320,7 +341,7 @@
   a.entry-tag-link:focus-visible,
   .tab:focus-visible,
   .social-links a:focus-visible,
-  .theme-toggle button:focus-visible,
+  .pill-toggle button:focus-visible,
   #search:focus-visible{
     outline: 2px solid var(--teal);
     outline-offset: 2px;
@@ -361,8 +382,19 @@
   }
 
   .entry-meta{
+    display:flex;
+    align-items:center;
+    gap: 7px;
     font-size: 12px;
     color: var(--grey);
+    overflow:hidden;
+  }
+
+  .entry-meta .venue-logo{ flex-shrink:0; padding: 2px 5px; }
+  .entry-meta .venue-logo img{ width: 30px; }
+
+  .entry-meta-text{
+    min-width:0;
     white-space: nowrap;
     overflow:hidden;
     text-overflow: ellipsis;
@@ -421,6 +453,216 @@
     padding: 14px 18px;
   }
 
+  /* =================================================================
+     TIMELINE — venue badge shared by both orientations, plus the
+     vertical-rail and horizontal-track layouts.
+     ================================================================= */
+  .venue-badge{
+    display:inline-flex;
+    flex-shrink:0;
+    align-items:center;
+    font-size: 9.5px;
+    font-weight:700;
+    letter-spacing: 0.05em;
+    text-transform:uppercase;
+    padding: 2px 7px;
+    border-radius: 10px;
+    border: 1px solid currentColor;
+    white-space:nowrap;
+  }
+
+  .venue-logo{
+    display:inline-flex;
+    flex-shrink:0;
+    align-items:center;
+    justify-content:center;
+    background: #fff;
+    border-radius: 4px;
+    padding: 3px 6px;
+    line-height:0;
+  }
+
+  .venue-logo img{
+    width: 42px;
+    height:auto;
+    display:block;
+  }
+
+  .tl-h-card .venue-logo{ padding: 2px 5px; }
+  .tl-h-card .venue-logo img{ width: 34px; }
+
+  .tl-vertical{
+    position:relative;
+    padding-left: 84px;
+  }
+
+  .tl-v-group{
+    position:relative;
+    padding-bottom: 32px;
+  }
+
+  .tl-v-group:last-child{ padding-bottom:0; }
+
+  .tl-v-date{
+    position:absolute;
+    left:-84px;
+    top:2px;
+    width:56px;
+    text-align:right;
+    font-size: 12px;
+    font-weight:700;
+    color: var(--grey);
+    line-height:1.3;
+  }
+
+  .tl-v-dot{
+    position:absolute;
+    left:-25px;
+    top:4px;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background: var(--teal);
+  }
+
+  .tl-v-line{
+    position:absolute;
+    left:-21px;
+    top:16px;
+    bottom:-32px;
+    width:2px;
+    background: var(--border);
+  }
+
+  .tl-v-group:last-child .tl-v-line{ display:none; }
+
+  .tl-v-cards{
+    display:flex;
+    flex-direction:column;
+    gap: 10px;
+  }
+
+  .tl-card{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--teal);
+    border-radius: 3px;
+    padding: 12px 16px;
+    text-decoration:none;
+    color:inherit;
+    transition: background .15s ease, transform .1s ease;
+  }
+
+  .tl-card:hover{
+    background: var(--hover);
+    transform: translateX(2px);
+  }
+
+  .tl-card:focus-visible{
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+  }
+
+  .tl-card-body{ min-width:0; flex:1; }
+
+  .tl-card-title{
+    font-size: 14px;
+    font-weight:600;
+    color: var(--white);
+    margin-bottom: 5px;
+    line-height:1.3;
+  }
+
+  .tl-card-meta{
+    font-size: 11.5px;
+    color: var(--grey);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+
+  .tl-h-scroll{
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding: 4px 4px 16px;
+  }
+
+  .tl-h-track{ position:relative; }
+
+  .tl-h-axis{
+    position:absolute;
+    left:0;
+    right:0;
+    height:2px;
+    background: var(--border);
+  }
+
+  .tl-h-stem{
+    position:absolute;
+    width:2px;
+    background: var(--border);
+  }
+
+  .tl-h-tick{
+    position:absolute;
+    width:2px;
+    height:10px;
+    background: var(--border);
+  }
+
+  .tl-h-label{
+    position:absolute;
+    width: 140px;
+    text-align:center;
+    font-size: 11px;
+    font-weight:700;
+    color: var(--grey);
+    white-space:nowrap;
+  }
+
+  .tl-h-card{
+    position:absolute;
+    width: 150px;
+    height: 74px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--teal);
+    border-radius: 4px;
+    padding: 8px 10px;
+    text-decoration:none;
+    color:inherit;
+    transition: background .15s ease, transform .1s ease;
+  }
+
+  .tl-h-card:hover{
+    background: var(--hover);
+    transform: translateY(-2px);
+  }
+
+  .tl-h-card:focus-visible{
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+  }
+
+  .tl-h-card-title{
+    font-size: 11.5px;
+    font-weight:600;
+    color: var(--white);
+    line-height:1.3;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
   footer{
     margin-top: 72px;
     padding-top: 24px;
@@ -439,9 +681,18 @@
   @media (max-width: 560px){
     header{ flex-direction:column; }
     .header-actions{ align-self:flex-start; margin-top:0; }
+    .controls-top{ flex-direction:column; align-items:stretch; }
+    #view-toggle{ align-self:flex-start; }
   }
 
   @media (max-width: 480px){
+    .tl-vertical{ padding-left: 62px; }
+    .tl-v-date{ left:-62px; width:44px; font-size:11px; }
+    .tl-v-dot{ left:-19px; }
+    .tl-v-line{ left:-15px; }
+    .tl-card{ padding:10px 14px; }
+    .tl-card-title{ font-size:13.5px; }
+
     .eyebrow{ font-size:10px; padding:4px 8px; margin-bottom:14px; }
     header{ margin-bottom:32px; }
     header p.sub{ font-size:14.5px; }
@@ -461,7 +712,8 @@
     .entry-icon{ width:30px; height:30px; }
     .entry-icon svg{ width:15px; height:15px; }
     .entry-title{ font-size:14px; }
-    .entry-meta{
+    .entry-meta{ flex-wrap:wrap; }
+    .entry-meta-text{
       white-space: normal;
       overflow: visible;
       text-overflow: unset;
@@ -503,7 +755,7 @@
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
         </a>
       </div>
-      <div class="theme-toggle" id="theme-toggle" role="group" aria-label="Theme">
+      <div class="pill-toggle" id="theme-toggle" role="group" aria-label="Theme">
         <button data-theme-btn="dark" aria-pressed="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           Dark
@@ -517,9 +769,19 @@
   </header>
 
   <div class="controls">
-    <div class="search-box">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="search" id="search" placeholder="Filter by title, author or venue…" autocomplete="off">
+    <div class="controls-top">
+      <div class="search-box" id="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="search" id="search" placeholder="Filter by title, author or venue…" autocomplete="off">
+      </div>
+      <div class="pill-toggle" id="view-toggle" role="group" aria-label="View">
+        <button data-view-btn="list" aria-pressed="false">List</button>
+        <button data-view-btn="timeline" aria-pressed="false">Timeline</button>
+      </div>
+    </div>
+    <div class="pill-toggle" id="orientation-toggle" role="group" aria-label="Timeline orientation" hidden>
+      <button data-orientation-btn="vertical" aria-pressed="false">Vertical</button>
+      <button data-orientation-btn="horizontal" aria-pressed="false">Horizontal</button>
     </div>
     <nav class="tabs" id="tabs" aria-label="Filter by model"></nav>
   </div>
@@ -572,12 +834,65 @@
   const MODELS = ["xLSTM", "TiRex", "Vision-LSTM", "Bio-xLSTM", "LRAM (Robotics)"];
   const MODEL_KEY = { "xLSTM":"xlstm", "TiRex":"tirex", "Vision-LSTM":"vision-lstm", "Bio-xLSTM":"bio-xlstm", "LRAM (Robotics)":"lram" };
 
+  const VENUE_COLORS = {
+    NeurIPS: "var(--venue-neurips)",
+    ICLR: "var(--venue-iclr)",
+    ICML: "var(--venue-icml)",
+    preprint: "var(--venue-preprint)"
+  };
+  const VENUE_LOGOS = {
+    NeurIPS: "assets/neurips-logo.svg",
+    ICLR: "assets/iclr-logo.svg",
+    ICML: "assets/icml-logo.svg"
+  };
+  const MONTH_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
   const tabsEl = document.getElementById("tabs");
   const contentEl = document.getElementById("content");
   const searchEl = document.getElementById("search");
+  const searchBoxEl = document.getElementById("search-box");
+  const orientationToggleEl = document.getElementById("orientation-toggle");
 
   let currentTab = "All";
   let currentQuery = "";
+  let currentView = localStorage.getItem("nxai-links-view") || "list";
+  let currentOrientation = localStorage.getItem("nxai-links-timeline-orientation") || "vertical";
+  let loadedLinks = null;
+
+  function setView(view){
+    currentView = view;
+    localStorage.setItem("nxai-links-view", view);
+    document.querySelectorAll("[data-view-btn]").forEach(btn=>{
+      const isActive = btn.dataset.viewBtn === view;
+      btn.classList.toggle("active", isActive);
+      btn.setAttribute("aria-pressed", String(isActive));
+    });
+    const isTimeline = view === "timeline";
+    searchBoxEl.hidden = isTimeline;
+    tabsEl.hidden = isTimeline;
+    orientationToggleEl.hidden = !isTimeline;
+    if (loadedLinks) render(loadedLinks);
+  }
+
+  function setOrientation(orientation){
+    currentOrientation = orientation;
+    localStorage.setItem("nxai-links-timeline-orientation", orientation);
+    document.querySelectorAll("[data-orientation-btn]").forEach(btn=>{
+      const isActive = btn.dataset.orientationBtn === orientation;
+      btn.classList.toggle("active", isActive);
+      btn.setAttribute("aria-pressed", String(isActive));
+    });
+    if (loadedLinks) render(loadedLinks);
+  }
+
+  document.querySelectorAll("[data-view-btn]").forEach(btn=>{
+    btn.addEventListener("click", () => setView(btn.dataset.viewBtn));
+  });
+  document.querySelectorAll("[data-orientation-btn]").forEach(btn=>{
+    btn.addEventListener("click", () => setOrientation(btn.dataset.orientationBtn));
+  });
+  setView(currentView);
+  setOrientation(currentOrientation);
 
   function matchesQuery(item, q){
     if (!q) return true;
@@ -603,7 +918,7 @@
         ${iconEl(item.icon)}
         <div class="entry-main">
           <div class="entry-title">${item.title}</div>
-          <div class="entry-meta">${item.meta || ""}</div>
+          <div class="entry-meta">${item.venue ? venueBadge(item.venue) : ""}<span class="entry-meta-text">${item.meta || ""}</span></div>
         </div>
         <span class="entry-tag">${item.tag}</span>
         <span class="entry-arrow">→</span>
@@ -621,7 +936,7 @@
       ${iconEl(item.icon)}
       <div class="entry-main">
         <div class="entry-title">${item.title}</div>
-        <div class="entry-meta">${item.meta || ""}</div>
+        <div class="entry-meta">${item.venue ? venueBadge(item.venue) : ""}<span class="entry-meta-text">${item.meta || ""}</span></div>
       </div>
       <div class="entry-links">${linkPills}</div>
     `;
@@ -642,6 +957,9 @@
     ["paper", "code"].forEach(type => {
       const typeItems = items.filter(i => i.type === type);
       if (!typeItems.length) return;
+      if (type === "paper"){
+        typeItems.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+      }
 
       const sub = document.createElement("div");
       sub.className = "subgroup-label";
@@ -653,6 +971,157 @@
       typeItems.forEach(i => grid.appendChild(entryEl(i)));
       container.appendChild(grid);
     });
+  }
+
+  function formatMonth(dateStr){
+    const [y, m] = dateStr.split("-");
+    return `${MONTH_NAMES[parseInt(m, 10) - 1]} ${y}`;
+  }
+
+  function venueBadge(venue){
+    const logo = VENUE_LOGOS[venue];
+    if (logo){
+      return `<span class="venue-logo"><img src="${logo}" alt="${venue}"></span>`;
+    }
+    const color = VENUE_COLORS[venue] || "var(--teal)";
+    return `<span class="venue-badge" style="color:${color}">${venue}</span>`;
+  }
+
+  function buildTimelineGroups(links){
+    const papers = links.filter(l => l.type === "paper" && l.date).sort((a, b) => a.date.localeCompare(b.date));
+    const groups = [];
+    papers.forEach(p => {
+      let g = groups[groups.length - 1];
+      if (!g || g.date !== p.date){ g = { date: p.date, items: [] }; groups.push(g); }
+      g.items.push(p);
+    });
+    return groups;
+  }
+
+  function timelineCardBody(item){
+    return `
+      <div class="tl-card-title">${item.title}</div>
+      <div class="tl-card-meta">${venueBadge(item.venue)}<span>${item.meta || ""}</span></div>
+    `;
+  }
+
+  function renderTimelineVertical(container, groups){
+    const wrap = document.createElement("div");
+    wrap.className = "tl-vertical";
+    groups.forEach(g => {
+      const row = document.createElement("div");
+      row.className = "tl-v-group";
+      row.innerHTML = `
+        <div class="tl-v-date">${formatMonth(g.date)}</div>
+        <div class="tl-v-dot"></div>
+        <div class="tl-v-line"></div>
+        <div class="tl-v-cards"></div>
+      `;
+      const cardsEl = row.querySelector(".tl-v-cards");
+      g.items.forEach(item => {
+        const a = document.createElement("a");
+        a.className = "tl-card";
+        a.href = item.url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.innerHTML = `<div class="tl-card-body">${timelineCardBody(item)}</div>`;
+        cardsEl.appendChild(a);
+      });
+      wrap.appendChild(row);
+    });
+    container.appendChild(wrap);
+  }
+
+  function monthsBetween(dateA, dateB){
+    const [ay, am] = dateA.split("-").map(Number);
+    const [by, bm] = dateB.split("-").map(Number);
+    return (by - ay) * 12 + (bm - am);
+  }
+
+  function renderTimelineHorizontal(container, groups){
+    const CARD_W = 150;
+    const PX_PER_MONTH = 55;
+    const MIN_GAP = 190;
+    const CARD_ROW = 88;
+    const TOP_PAD = 20;
+    const BOTTOM_PAD = 46;
+
+    // Space ticks proportionally to real elapsed time, but never closer
+    // than MIN_GAP — otherwise cards for months that fall close together
+    // would overlap.
+    const centers = [CARD_W / 2];
+    groups.forEach((g, i) => {
+      if (i === 0) return;
+      const idealX = centers[0] + monthsBetween(groups[0].date, g.date) * PX_PER_MONTH;
+      centers.push(Math.max(idealX, centers[i - 1] + MIN_GAP));
+    });
+
+    const maxStack = Math.max(1, ...groups.map(g => g.items.length));
+    const axisY = TOP_PAD + maxStack * CARD_ROW;
+    const trackHeight = axisY + BOTTOM_PAD;
+    const trackWidth = centers[centers.length - 1] + CARD_W / 2 + 20;
+
+    const scrollWrap = document.createElement("div");
+    scrollWrap.className = "tl-h-scroll";
+    const track = document.createElement("div");
+    track.className = "tl-h-track";
+    track.style.width = trackWidth + "px";
+    track.style.height = trackHeight + "px";
+
+    const axis = document.createElement("div");
+    axis.className = "tl-h-axis";
+    axis.style.top = axisY + "px";
+    track.appendChild(axis);
+
+    groups.forEach((g, i) => {
+      const cx = centers[i];
+
+      const stem = document.createElement("div");
+      stem.className = "tl-h-stem";
+      stem.style.left = (cx - 1) + "px";
+      stem.style.top = (axisY - g.items.length * CARD_ROW) + "px";
+      stem.style.height = (g.items.length * CARD_ROW) + "px";
+      track.appendChild(stem);
+
+      const tick = document.createElement("div");
+      tick.className = "tl-h-tick";
+      tick.style.left = (cx - 1) + "px";
+      tick.style.top = axisY + "px";
+      track.appendChild(tick);
+
+      const label = document.createElement("div");
+      label.className = "tl-h-label";
+      label.style.left = (cx - CARD_W / 2) + "px";
+      label.style.top = (axisY + 16) + "px";
+      label.textContent = formatMonth(g.date);
+      track.appendChild(label);
+
+      g.items.forEach((item, j) => {
+        const a = document.createElement("a");
+        a.className = "tl-h-card";
+        a.href = item.url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.title = item.title;
+        a.style.left = (cx - CARD_W / 2) + "px";
+        a.style.top = (axisY - (j + 1) * CARD_ROW) + "px";
+        a.style.borderTopColor = VENUE_COLORS[item.venue] || "var(--teal)";
+        a.innerHTML = `<div class="tl-h-card-title">${item.title}</div>${venueBadge(item.venue)}`;
+        track.appendChild(a);
+      });
+    });
+
+    scrollWrap.appendChild(track);
+    container.appendChild(scrollWrap);
+  }
+
+  function renderTimeline(links){
+    const groups = buildTimelineGroups(links);
+    if (currentOrientation === "vertical"){
+      renderTimelineVertical(contentEl, groups);
+    } else {
+      renderTimelineHorizontal(contentEl, groups);
+    }
   }
 
   function renderTabs(active, counts, totalCount, onSelect){
@@ -669,6 +1138,13 @@
   }
 
   function render(links){
+    contentEl.innerHTML = "";
+
+    if (currentView === "timeline"){
+      renderTimeline(links);
+      return;
+    }
+
     const q = currentQuery.trim().toLowerCase();
     const filtered = links.filter(l => matchesQuery(l, q));
 
@@ -676,8 +1152,6 @@
     MODELS.forEach(m => { counts[MODEL_KEY[m]] = filtered.filter(l => l.model === MODEL_KEY[m]).length; });
 
     renderTabs(currentTab, counts, filtered.length, (label) => { currentTab = label; render(links); });
-
-    contentEl.innerHTML = "";
 
     if (currentTab === "All"){
       MODELS.forEach(m => {
@@ -736,6 +1210,7 @@
     .then(links => {
       document.getElementById("last-updated").textContent =
         new Date().toISOString().slice(0, 10);
+      loadedLinks = links;
       render(links);
       injectJsonLd(links);
       searchEl.addEventListener("input", () => {

@@ -28,6 +28,7 @@ Field reference:
 - `icon`: `arxiv`, `github`, `huggingface`, `docker`, `jupyter`, `book`, `article`, or `package`. Brand icons render in their own brand colour; the rest render in teal.
 - `meta`: freeform subtitle line, kept to the format `Author(s) et al. · Venue Year` for consistency.
 - `tag`: short label shown as a pill on the right (arXiv ID, "GitHub", "Docs", etc).
+- `date` and `venue` (papers only): power the Timeline view. `date` is `"YYYY-MM"` — use the actual conference month (not the arXiv submission month) once a paper is accepted; fall back to the arXiv month only for genuine preprints. `venue` is one of `NeurIPS`, `ICLR`, `ICML`, or `preprint`, and drives the colour-coded badge. Entries without both fields are simply left out of the timeline.
 
 **Same content on two platforms** (like the "TiRex on the edge" post): instead of `"url"`, use a `"links"` array so both destinations get their own pill instead of implying two different articles:
 

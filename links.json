@@ -33,6 +33,8 @@
   { "model": "vision-lstm", "type": "code", "icon": "github", "title": "Vision-LSTM source", "meta": "NX-AI/vision-lstm", "tag": "GitHub", "url": "https://github.com/NX-AI/vision-lstm" },
 
   { "model": "bio-xlstm", "type": "paper", "icon": "arxiv", "title": "Bio-xLSTM: Generative Modeling, Representation and In-Context Learning of Biological and Chemical Sequences", "meta": "Schmidinger et al. · ICLR 2025", "tag": "2411.04165", "url": "https://arxiv.org/abs/2411.04165" },
+  { "model": "bio-xlstm", "type": "code", "icon": "github", "title": "DNA-xLSTM source", "meta": "ml-jku/DNA-xLSTM (JKU)", "tag": "GitHub", "url": "https://github.com/ml-jku/DNA-xLSTM" },
+  { "model": "bio-xlstm", "type": "code", "icon": "github", "title": "Prot-xLSTM source", "meta": "ml-jku/Prot-xLSTM (JKU)", "tag": "GitHub", "url": "https://github.com/ml-jku/Prot-xLSTM" },
   { "model": "bio-xlstm", "type": "code", "icon": "github", "title": "Chem-xLSTM source", "meta": "ml-jku/Chem-xLSTM (JKU)", "tag": "GitHub", "url": "https://github.com/ml-jku/Chem-xLSTM" },
 
   { "model": "lram", "type": "paper", "icon": "arxiv", "title": "A Large Recurrent Action Model: xLSTM Enables Fast Inference for Robotics Tasks", "meta": "Schmied et al. · ICML 2025", "tag": "2410.22391", "url": "https://arxiv.org/abs/2410.22391" },

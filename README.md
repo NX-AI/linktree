@@ -51,8 +51,3 @@ python3 -m http.server 8000
 ```
 
 then open `http://localhost:8000/`. This restriction disappears once deployed to GitHub Pages, since that's real HTTP.
-
-## Open items carried over from the last revision
-
-- **"TiRex2" (arXiv 2607.01204)** is still not included — could not verify this paper exists on arXiv or any secondary index. Confirm the correct ID before adding.
-- **Bio-xLSTM code repos** (DNA-xLSTM, Prot-xLSTM, Chem-xLSTM, per the paper's own text) are not linked — exact GitHub URLs unconfirmed.

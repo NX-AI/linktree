@@ -7,6 +7,7 @@
   { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "Effective Distillation to Hybrid xLSTM Architectures", "meta": "Hauzenberger et al. · ICML 2026", "tag": "2603.15590", "url": "https://arxiv.org/abs/2603.15590", "date": "2026-07", "venue": "ICML" },
   { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "On Subquadratic Architectures: From Applications to Principles", "meta": "Hartl et al. · preprint 2026", "tag": "2606.12364", "url": "https://arxiv.org/abs/2606.12364", "date": "2026-06", "venue": "preprint" },
   { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "KVpop — Key-Value Cache Compression with Predictive Online Pruning", "meta": "Hauzenberger et al. · preprint 2026", "tag": "2607.05061", "url": "https://arxiv.org/abs/2607.05061", "date": "2026-07", "venue": "preprint" },
+  { "model": "xlstm", "type": "paper", "icon": "arxiv", "title": "Accelerating LLM Inference via Vector Index Based Output Embeddings", "meta": "Loretz et al. · 	ICML 2026 - AdaptFM Workshop", "tag": "2608.27460", "url": "https://arxiv.org/abs/2608.27460", "date": "2026-06", "venue": "ICML" },
   { "model": "xlstm", "type": "code", "icon": "github", "title": "xLSTM source (PyTorch)", "meta": "NX-AI/xlstm", "tag": "GitHub", "url": "https://github.com/NX-AI/xlstm" },
   { "model": "xlstm", "type": "code", "icon": "github", "title": "xLSTM source (JAX)", "meta": "NX-AI/xlstm-jax", "tag": "GitHub", "url": "https://github.com/NX-AI/xlstm-jax" },
 

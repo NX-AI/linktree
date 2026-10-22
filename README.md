@@ -24,7 +24,7 @@ Open `links.json` and add an object to the array:
 
 Field reference:
 - `model`: one of `xlstm`, `tirex`, `vision-lstm`, `bio-xlstm`, `lram`. To add a new model family, also add it to the `MODELS` / `MODEL_KEY` lists near the top of the script in `index.html` — that's the one structural change that does require touching the HTML, since it drives the filter tabs.
-- `type`: `paper` or `code`. Controls which subheading it appears under.
+- `type`: `model`, `paper` or `code`. Controls which subheading it appears under (Papers first, then Code & resources, then Models). Use `model` with `"icon": "huggingface"` for weights on Hugging Face (tag `Model` for a single repo, `Collection` for a collection).
 - `icon`: `arxiv`, `github`, `huggingface`, `docker`, `jupyter`, `book`, `article`, or `package`. Brand icons render in their own brand colour; the rest render in teal.
 - `meta`: freeform subtitle line, kept to the format `Author(s) et al. · Venue Year` for consistency.
 - `tag`: short label shown as a pill on the right (arXiv ID, "GitHub", "Docs", etc).
@@ -52,3 +52,7 @@ python3 -m http.server 8000
 ```
 
 then open `http://localhost:8000/`. This restriction disappears once deployed to GitHub Pages, since that's real HTTP.
+
+## Podcast banner
+
+The Industrial AI Podcast banner under the header (Spotify, YouTube, Apple Podcasts buttons) is hardcoded in `index.html` (`a.podcast`), not in `links.json`, so it stays visible regardless of filter, search or view. Change the platform URLs or copy there.

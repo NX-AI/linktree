@@ -56,3 +56,7 @@ then open `http://localhost:8000/`. This restriction disappears once deployed to
 ## Podcast banner
 
 The Industrial AI Podcast banner under the header (Spotify, YouTube, Apple Podcasts buttons) is hardcoded in `index.html` (`a.podcast`), not in `links.json`, so it stays visible regardless of filter, search or view. Change the platform URLs or copy there.
+
+## Download counts
+
+Entries with an `"hf": "NX-AI/TiRex"` (Hugging Face repo) or `"pypi": "tirex-ts"` (PyPI package) field show an all-time download count (`↓ 3.8M`) next to the tag pill. Entries with the `github` icon also show their GitHub star count (`★ 1.2k`), read from the repo in their `url`, and `hf` entries show Hugging Face likes (`♥ 100`). Stars and likes only appear at 100 or more (`MIN_SOCIAL` in `index.html`); `stats.json` keeps all values. Numbers come from `stats.json`, which `.github/workflows/update-stats.yml` refreshes daily via `scripts/update_stats.py` (Hugging Face API, pepy.tech for PyPI, GitHub API for stars). Run the script by hand with `python3 scripts/update_stats.py`, or trigger the workflow from the Actions tab. Entries without those fields, such as collections, show no number.

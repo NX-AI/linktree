@@ -406,6 +406,23 @@
     text-overflow: ellipsis;
   }
 
+  .entry-stat{
+    flex-shrink:0;
+    font-size: 12px;
+    font-weight:600;
+    color: var(--grey);
+    white-space:nowrap;
+  }
+
+  .entry-stat-src{
+    font-size: 9.5px;
+    font-weight:600;
+    letter-spacing: 0.06em;
+    text-transform:uppercase;
+    margin-left: 4px;
+    opacity: .75;
+  }
+
   .entry-tag{
     flex-shrink:0;
     font-size: 10.5px;
@@ -777,6 +794,7 @@
       text-overflow: unset;
     }
     .entry-arrow{ display:none; }
+    .entry-stat{ font-size:11px; }
     .entry-tag, .entry-tag-link{ font-size:9.5px; padding:3px 7px; }
     .entry-links{ flex-wrap:wrap; justify-content:flex-end; }
 
@@ -978,6 +996,42 @@
     return `<div class="entry-icon" style="color:${icon.color}">${icon.svg}</div>`;
   }
 
+  let stats = {};
+  const MIN_SOCIAL = 100;   // only show stars / likes at or above this
+
+  function formatCount(n){
+    // One decimal below 10 of a unit (2.2k, 3.8M), whole numbers above (96k, 350k).
+    const short = (v, unit) => (v >= 10 ? Math.round(v) : v.toFixed(1).replace(/\.0$/, "")) + unit;
+    if (n >= 1e6) return short(n / 1e6, "M");
+    if (n >= 1e3) return short(n / 1e3, "k");
+    return String(n);
+  }
+
+  // GitHub stars and all-time downloads, filled from stats.json (refreshed daily by a GitHub Action).
+  // Entries without a number simply show nothing.
+  function githubRepo(item){
+    const m = item.icon === "github" && item.url && item.url.match(/^https:\/\/github\.com\/([^/]+\/[^/#?]+)/);
+    return m ? m[1] : null;
+  }
+
+  function statEl(item){
+    const parts = [];
+    const stars = stats.github?.[githubRepo(item)];
+    if (stars >= MIN_SOCIAL){
+      parts.push(`<span class="entry-stat" title="${stars.toLocaleString("en-US")} stars on GitHub">★ ${formatCount(stars)}</span>`);
+    }
+    const likes = stats.hf_likes?.[item.hf];
+    if (likes >= MIN_SOCIAL){
+      parts.push(`<span class="entry-stat" title="${likes.toLocaleString("en-US")} likes on Hugging Face">♥ ${formatCount(likes)}</span>`);
+    }
+    const n = item.hf ? stats.hf?.[item.hf] : item.pypi ? stats.pypi?.[item.pypi] : null;
+    if (n != null){
+      const src = item.hf ? "Hugging Face" : "PyPI";
+      parts.push(`<span class="entry-stat" title="${n.toLocaleString("en-US")} all-time downloads on ${src}">↓ ${formatCount(n)}${item.pypi ? '<span class="entry-stat-src">PyPI</span>' : ""}</span>`);
+    }
+    return parts.join("");
+  }
+
   function entryEl(item){
     // Single-link entry: whole card is clickable.
     if (!item.links){
@@ -992,6 +1046,7 @@
           <div class="entry-title">${item.title}</div>
           <div class="entry-meta">${item.venue ? venueBadge(item.venue) : ""}<span class="entry-meta-text">${item.meta || ""}</span></div>
         </div>
+        ${statEl(item)}
         <span class="entry-tag">${item.tag}</span>
         <span class="entry-arrow">→</span>
       `;
@@ -1274,7 +1329,10 @@
     document.head.appendChild(script);
   }
 
-  fetch("links.json")
+  fetch("stats.json")
+    .then(res => res.ok ? res.json() : {})
+    .catch(() => ({}))
+    .then(s => { stats = s; return fetch("links.json"); })
     .then(res => {
       if (!res.ok) throw new Error("links.json returned " + res.status);
       return res.json();

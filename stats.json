@@ -1,13 +1,13 @@
 {
   "hf": {
-    "NX-AI/TiRex": 3814759,
-    "NX-AI/TiRex-2": 20233,
-    "NX-AI/xLSTM-7b": 180990
+    "NX-AI/TiRex": 3818517,
+    "NX-AI/TiRex-2": 20321,
+    "NX-AI/xLSTM-7b": 181056
   },
   "pypi": {
-    "tirex-2": 38106,
-    "tirex-ts": 97097,
-    "xlstm": 358543
+    "tirex-2": 39055,
+    "tirex-ts": 97629,
+    "xlstm": 359322
   },
   "hf_likes": {
     "NX-AI/TiRex": 100,
@@ -15,16 +15,16 @@
     "NX-AI/xLSTM-7b": 125
   },
   "github": {
-    "NX-AI/KronLSTM": 60,
+    "NX-AI/KronLSTM": 61,
     "NX-AI/tirex": 307,
     "NX-AI/tirex-2": 155,
     "NX-AI/vision-lstm": 492,
-    "NX-AI/xlstm": 2211,
+    "NX-AI/xlstm": 2212,
     "NX-AI/xlstm-jax": 105,
     "ml-jku/Chem-xLSTM": 13,
     "ml-jku/DNA-xLSTM": 17,
     "ml-jku/LRAM": 38,
     "ml-jku/Prot-xLSTM": 13
   },
-  "updated": "2026-10-28"
+  "updated": "2026-10-29"
 }

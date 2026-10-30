@@ -1,13 +1,13 @@
 {
   "hf": {
-    "NX-AI/TiRex": 3818517,
-    "NX-AI/TiRex-2": 20321,
-    "NX-AI/xLSTM-7b": 181056
+    "NX-AI/TiRex": 3821585,
+    "NX-AI/TiRex-2": 20441,
+    "NX-AI/xLSTM-7b": 181121
   },
   "pypi": {
-    "tirex-2": 39055,
-    "tirex-ts": 97629,
-    "xlstm": 359322
+    "tirex-2": 40127,
+    "tirex-ts": 98313,
+    "xlstm": 359792
   },
   "hf_likes": {
     "NX-AI/TiRex": 100,
@@ -26,5 +26,5 @@
     "ml-jku/LRAM": 38,
     "ml-jku/Prot-xLSTM": 13
   },
-  "updated": "2026-10-29"
+  "updated": "2026-10-30"
 }

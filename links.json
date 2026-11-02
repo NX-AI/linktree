@@ -39,6 +39,7 @@
   },
 
   { "model": "vision-lstm", "type": "paper", "icon": "arxiv", "title": "Vision-LSTM: xLSTM as Generic Vision Backbone", "meta": "Alkin et al. · ICLR 2025", "tag": "2406.04303", "url": "https://arxiv.org/abs/2406.04303", "date": "2025-04", "venue": "ICLR" },
+  { "model": "vision-lstm", "type": "code", "icon": "globe", "title": "Vision-LSTM project page", "meta": "Overview and results", "tag": "Website", "url": "https://nx-ai.github.io/vision-lstm/" },
   { "model": "vision-lstm", "type": "code", "icon": "github", "title": "Vision-LSTM source", "meta": "NX-AI/vision-lstm", "tag": "GitHub", "url": "https://github.com/NX-AI/vision-lstm" },
 
   { "model": "bio-xlstm", "type": "paper", "icon": "arxiv", "title": "Bio-xLSTM: Generative Modeling, Representation and In-Context Learning of Biological and Chemical Sequences", "meta": "Schmidinger et al. · ICLR 2025", "tag": "2411.04165", "url": "https://arxiv.org/abs/2411.04165", "date": "2025-04", "venue": "ICLR" },

@@ -19,13 +19,13 @@ Option B: fold into an existing repo (e.g. the `tirex` repo) as a `/docs` folder
 Open `links.json` and add an object to the array:
 
 ```json
-{ "model": "tirex", "type": "paper", "icon": "arxiv", "title": "...", "meta": "Author et al. · Venue Year", "tag": "2611.xxxxx", "url": "https://arxiv.org/abs/2611.xxxxx" }
+{ "model": "tirex", "type": "paper", "icon": "paper", "title": "...", "meta": "Author et al. · Venue Year", "tag": "2611.xxxxx", "url": "https://arxiv.org/abs/2611.xxxxx" }
 ```
 
 Field reference:
 - `model`: one of `xlstm`, `tirex`, `vision-lstm`, `bio-xlstm`, `lram`. To add a new model family, also add it to the `MODELS` / `MODEL_KEY` lists near the top of the script in `index.html` — that's the one structural change that does require touching the HTML, since it drives the filter tabs.
 - `type`: `model`, `paper` or `code`. Controls which subheading it appears under (Papers first, then Code & resources, then Models). Use `model` with `"icon": "huggingface"` for weights on Hugging Face (tag `Model` for a single repo, `Collection` for a collection).
-- `icon`: `arxiv`, `github`, `huggingface`, `docker`, `jupyter`, `book`, `article`, `globe` (project or intro web page), or `package`. Brand icons render in their own brand colour; the rest render in teal.
+- `icon`: `paper`, `github`, `huggingface`, `docker`, `jupyter`, `book`, `article`, `globe` (project or intro web page), or `package`. Brand icons render in their own brand colour; the rest render in teal. Papers use the generic `paper` glyph (no arXiv or conference logos).
 - `meta`: freeform subtitle line, kept to the format `Author(s) et al. · Venue Year` for consistency.
 - `tag`: short label shown as a pill on the right (arXiv ID, "GitHub", "Docs", etc).
 - `date` and `venue` (papers only): power the Timeline view. `date` is `"YYYY-MM"` — use the actual conference month (not the arXiv submission month) once a paper is accepted; fall back to the arXiv month only for genuine preprints. `venue` is one of `NeurIPS`, `ICLR`, `ICML`, or `preprint`, and drives the colour-coded badge. Entries without both fields are simply left out of the timeline.

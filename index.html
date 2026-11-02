@@ -1007,7 +1007,7 @@
     return String(n);
   }
 
-  // GitHub stars and all-time downloads, filled from stats.json (refreshed daily by a GitHub Action).
+  // GitHub stars and all-time downloads, filled from stats.json (refreshed weekly by a GitHub Action).
   // Entries without a number simply show nothing.
   function githubRepo(item){
     const m = item.icon === "github" && item.url && item.url.match(/^https:\/\/github\.com\/([^/]+\/[^/#?]+)/);

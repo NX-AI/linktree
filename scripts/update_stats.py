@@ -9,7 +9,6 @@ never blanks a number on the page.
 import json
 import os
 import re
-import urllib.parse
 import urllib.request
 from datetime import date
 from pathlib import Path
@@ -32,7 +31,24 @@ def hf_likes(repo):
 
 
 def pypi_downloads(package):
-    return get_json(f"https://pepy.tech/api/v2/projects/{urllib.parse.quote(package)}")["total_downloads"]
+    # All-time downloads from the public ClickHouse PyPI dataset (the data behind
+    # clickpy.clickhouse.com), read with its public read-only "play" user. Same source as
+    # https://nx-ai.github.io, so both pages show the same numbers.
+    name = re.sub(r"[-_.]+", "-", package).lower()  # PEP 503 normalised name
+    if not re.fullmatch(r"[a-z0-9-]+", name):
+        raise ValueError(f"invalid package name {package!r}")
+    query = f"SELECT sum(count) AS total FROM pypi.pypi_downloads_per_day WHERE project = '{name}' FORMAT JSON"
+    req = urllib.request.Request(
+        "https://sql-clickhouse.clickhouse.com/?user=play",
+        data=query.encode(),
+        headers={"User-Agent": "nxai-linktree-stats"},
+    )
+    with urllib.request.urlopen(req, timeout=60) as res:
+        total = int(json.load(res)["data"][0]["total"])
+    if not total:
+        # An unknown package sums to 0; keep the previous value rather than showing 0.
+        raise ValueError(f"no downloads found for {name}")
+    return total
 
 
 def github_stars(repo):

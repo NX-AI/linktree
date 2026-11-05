@@ -1,0 +1,13 @@
+{
+  "name": "nxai-linktree-search",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "build": "node search/build.mjs _site",
+    "build:search": "node search/build.mjs _site"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "4.3.1"
+  }
+}

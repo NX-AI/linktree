@@ -11,6 +11,7 @@ export function attachSearch(entries, onResults, onState = () => {}) {
   const action = document.getElementById('search-download');
   const count = document.getElementById('search-count');
   const container = document.getElementById('search-settings');
+  const toggleLabel = toggle.closest('label');
   let state = 'idle';
 
   const engine = createSearch(entries, {
@@ -26,8 +27,9 @@ export function attachSearch(entries, onResults, onState = () => {}) {
       progress.hidden = info.state !== 'loading';
       progress.max = info.total || 1;
       progress.value = info.loaded || 0;
-      action.hidden = info.state !== 'consent' && info.state !== 'error';
-      action.textContent = info.state === 'consent' ? 'Download model' : 'Retry';
+      toggleLabel.hidden = info.state === 'off';
+      action.hidden = info.state !== 'off' && info.state !== 'error';
+      action.textContent = info.state === 'off' ? 'Enable semantic search (about 377 MB)' : 'Retry';
       let message;
       switch (info.state) {
         case 'loading':
@@ -37,8 +39,7 @@ export function attachSearch(entries, onResults, onState = () => {}) {
           break;
         case 'searching': message = 'Searching by meaning…'; break;
         case 'ready': message = `Words + meaning${info.backend ? ` · ${info.backend}` : ''}`; break;
-        case 'off': message = 'Keyword search only.'; break;
-        case 'consent': message = 'Semantic search downloads about 377 MB when the model is not cached.'; break;
+        case 'off': message = 'Keyword search is active. Semantic search runs in your browser after you enable it.'; break;
         case 'error': message = 'Semantic search is unavailable. Keyword search still works.'; break;
         default: message = 'Text only · about 377 MB download when not cached · queries stay in your browser.';
       }
@@ -109,7 +110,7 @@ if (source) {
       head.append(title, match);
       const text = document.createElement('p');
       text.className = 'search-result-text';
-      text.textContent = result.text;
+      text.textContent = result.snippet;
       link.append(head, text);
       item.append(link);
       list.append(item);

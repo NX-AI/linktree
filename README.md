@@ -54,7 +54,7 @@ Then open `http://localhost:8000/`.
 
 Search uses the text encoder of [EmbeddingGemma 2](https://huggingface.co/onnx-community/embeddinggemma-2-ONNX).
 The build embeds the entries in `links.json`; browser workers embed queries with the same model.
-Queries stay in the browser. Semantic search downloads about 377 MB when the model is not cached.
+Queries stay in the browser. Semantic search is off by default; after a visitor enables it, it downloads about 377 MB when the model is not cached.
 The browser can cache the model for later searches.
 Keyword search works while the model loads and when semantic search is off or unavailable.
 

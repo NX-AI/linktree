@@ -6,8 +6,8 @@ const PREFERENCE = 'nxai-semantic-search';
 export function createSearch(entries, { onResults, onStatus }) {
   const live = entries.map((entry) => ({ ...entry }));
   const keywords = createKeywordIndex(live);
-  let enabled = true;
-  try { enabled = globalThis.localStorage.getItem(PREFERENCE) !== 'off'; } catch { /* Storage is optional. */ }
+  let enabled = false;
+  try { enabled = globalThis.localStorage.getItem(PREFERENCE) === 'on'; } catch { /* Storage is optional. */ }
   let query = '';
   let sequence = 0;
   let desiredId = null;
@@ -23,7 +23,6 @@ export function createSearch(entries, { onResults, onStatus }) {
   let debounce = null;
   let deadline = null;
   let disposed = false;
-  let consented = false;
   let failure = '';
   let status = null;
 
@@ -155,13 +154,6 @@ export function createSearch(entries, { onResults, onStatus }) {
 
   function begin(id) {
     if (disposed || !enabled || failure || !query || id !== sequence) return;
-    const connection = globalThis.navigator?.connection;
-    const metered = connection?.saveData || connection?.metered || connection?.type === 'cellular' ||
-      ['slow-2g', '2g'].includes(connection?.effectiveType);
-    if (!consented && metered && !workerReady && !loading) {
-      report('consent', { message: 'Semantic search may download a text model. Enable it to continue on this connection.' });
-      return;
-    }
     desiredId = id;
     if (workerReady) sendQuery();
     else if (!loading) void load();
@@ -202,10 +194,8 @@ export function createSearch(entries, { onResults, onStatus }) {
       stop();
       report('off', { loaded: 0, total: 0, backend: '', message: 'Semantic search is off. Keyword search is available.' });
     } else {
-      consented = true;
-      report(loading ? 'loading' : workerReady ? 'ready' : 'idle', {
-        message: loading ? 'Loading semantic search.' : workerReady ? 'Semantic search is ready on this device.' : 'Enter a query to start semantic search.',
-      });
+      if (!loading && !workerReady) void load();
+      else report(loading ? 'loading' : 'ready', { message: loading ? 'Loading semantic search.' : 'Semantic search is ready on this device.' });
       if (query) begin(sequence);
     }
   }

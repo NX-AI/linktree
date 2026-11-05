@@ -26,14 +26,14 @@ jobs:
       - uses: actions/checkout@v7
         with:
           ref: main
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: "24"
           cache: npm
       - run: npm ci
       - name: Check search contracts
         run: node --test search/tests/*.test.mjs
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: .hf-cache
           key: search-text-q8-daa72c51243991dfcaf9f9137d2c573d8f7790c0-transformers-4.3.1-${{ runner.os }}

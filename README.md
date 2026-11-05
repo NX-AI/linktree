@@ -1,18 +1,15 @@
 # NXAI publications & resources page
 
-Two files, no build step, no dependencies beyond a Google Fonts CDN link:
-- `index.html` — page shell, styling, rendering logic. You should not need to touch this for routine updates.
-- `links.json` — every entry on the page. This is the only file you edit to add, remove, or correct a link.
+Content stays in `links.json`; the build generates a text search index for the browser.
+- `index.html` contains the page shell, styles and rendering logic.
+- `links.json` contains every entry. Edit this file for routine content updates.
+- `search/` contains the text index builder, browser worker, ranking and search interface.
 
 ## Deploy on GitHub Pages
 
-Option A: dedicated repo (recommended for a short URL like `nx-ai.com/links` via CNAME later)
-1. Create a repo, e.g. `NX-AI/linktree`.
-2. Commit both `index.html` and `links.json` to the `main` branch, in the same folder.
-3. Repo Settings > Pages > Source: `main` branch, `/ (root)`.
-4. Page is live at `https://nx-ai.github.io/linktree/`.
-
-Option B: fold into an existing repo (e.g. the `tirex` repo) as a `/docs` folder if you want to reuse Pages already configured there. Keep both files together in that folder.
+Set the repository's Pages source to **GitHub Actions**.
+The Pages workflow builds the text search index and deploys `_site/` after changes to `main`.
+The site is served at `https://nx-ai.github.io/linktree/`.
 
 ## Adding or editing an entry
 
@@ -48,10 +45,18 @@ No `LAST_UPDATED` constant to remember anymore — the footer date is generated 
 Opening `index.html` directly from disk (`file://...`) will fail silently or show a load error, because browsers block `fetch()` of local files for security reasons. Serve the folder over HTTP instead:
 
 ```
-python3 -m http.server 8000
+npm ci
+npm run build
+python3 -m http.server 8000 --directory _site
 ```
 
-then open `http://localhost:8000/`. This restriction disappears once deployed to GitHub Pages, since that's real HTTP.
+Then open `http://localhost:8000/`.
+
+Search uses the text encoder of [EmbeddingGemma 2](https://huggingface.co/onnx-community/embeddinggemma-2-ONNX).
+The build embeds the entries in `links.json`; browser workers embed queries with the same model.
+Queries stay in the browser. Semantic search downloads about 377 MB when the model is not cached.
+The browser can cache the model for later searches.
+Keyword search works while the model loads and when semantic search is off or unavailable.
 
 ## Podcast banner
 

@@ -1,0 +1,5 @@
+_site/
+node_modules/
+.cache/
+.hf-cache/
+.DS_Store

@@ -15,7 +15,6 @@ export function stageSite(outputDir) {
   }
   const entries = linkEntries(JSON.parse(fs.readFileSync(path.join(ROOT, 'links.json'), 'utf8')));
   validateEntries(entries);
-  fs.writeFileSync(path.join(searchDir, 'entries.json'), JSON.stringify(entries));
   for (const file of fs.readdirSync(import.meta.dirname, { withFileTypes: true })) {
     if (file.isFile() && (file.name.endsWith('.js') || file.name === 'ui.css')) {
       fs.copyFileSync(path.join(import.meta.dirname, file.name), path.join(searchDir, file.name));

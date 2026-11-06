@@ -115,7 +115,7 @@ export function createSearch(entries, { onResults, onStatus }) {
           if (data.id === sentId) { sentId = null; clearDeadline(); }
           if (data.id !== sequence || desiredId !== sequence || !query) return;
           const semantic = semanticSearch(vectorIndex, data.vector);
-          onResults(combine(live, keywordSearch(keywords, query), semantic));
+          onResults(combine(live, keywordSearch(keywords, query, { requireAll: semantic.length > 0 }), semantic));
           report('ready', { message: 'Semantic search is ready on this device.' });
         } else if (data.type === 'error' && (data.id === undefined || data.id === sequence)) {
           throw new Error(data.message || 'Semantic search failed.');

@@ -1,0 +1,89 @@
+.semantic-search {
+  --search-text: var(--text, var(--white));
+  color: var(--search-text);
+  min-width: 0;
+}
+.semantic-search[hidden], .semantic-search [hidden] { display: none !important; }
+.semantic-search .search-box { position: relative; margin: 0; }
+.semantic-search .search-box > svg {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  color: var(--grey);
+  pointer-events: none;
+}
+.semantic-search #search {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 16px 11px 42px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--card);
+  color: var(--search-text);
+  font: inherit;
+  font-size: 16px;
+}
+.semantic-search input[type="search"]::placeholder { color: var(--grey); }
+.semantic-search :focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+.search-settings {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.semantic-toggle {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  color: var(--search-text);
+  cursor: pointer;
+}
+.semantic-toggle input { width: 16px; height: 16px; margin: 0; accent-color: var(--teal); }
+.search-status { flex: 1 1 260px; color: var(--grey); }
+.search-action {
+  min-height: 32px;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--card);
+  color: var(--teal);
+  font: inherit;
+  cursor: pointer;
+}
+.search-action:hover { border-color: var(--teal); }
+.search-progress { display: block; width: 100%; height: 4px; margin-top: 8px; accent-color: var(--teal); }
+.semantic-search .search-count { margin: 10px 0 0; font-size: 13px; color: var(--grey); }
+.search-match {
+  display: inline-block;
+  flex: none;
+  margin-left: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--teal);
+}
+.search-query-grid { margin-top: 24px; }
+.search-query-grid .entry-title { line-height: 1.5; }
+.search-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@media (max-width: 480px) {
+  .search-settings { gap: 4px 12px; }
+  .search-status { flex-basis: 100%; }
+}

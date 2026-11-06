@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="search/ui.css">
 <style>
   :root{
     --bg:#111111;
@@ -710,11 +711,11 @@
   a.podcast-btn.primary:hover{ filter: brightness(1.1); }
   a.podcast-btn:focus-visible{ outline: 2px solid var(--btn); outline-offset: 2px; }
   @media (max-width: 480px){
-    a.podcast{ flex-wrap:wrap; padding:14px; gap:12px; }
+    .podcast{ flex-wrap:wrap; padding:14px; gap:12px; }
     .podcast-icon{ width:42px; height:42px; }
     .podcast-icon svg{ width:24px; height:24px; }
     .podcast-title{ font-size:16.5px; }
-    .podcast-platforms{ margin-left:54px; justify-content:flex-start; }
+    .podcast-platforms{ margin-left:54px; max-width:calc(100% - 54px); justify-content:flex-start; }
   }
 
   footer{
@@ -837,16 +838,26 @@
     </div>
   </div>
 
-  <div class="controls">
+  <div class="controls semantic-search">
     <div class="controls-top">
       <div class="search-box" id="search-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="search" id="search" placeholder="Filter by title, author or venue…" autocomplete="off">
+        <label class="search-sr-only" for="search">Search publications and resources</label>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="search" id="search" placeholder="Search by words or meaning…" autocomplete="off" aria-describedby="search-status" aria-controls="content">
       </div>
       <div class="pill-toggle" id="view-toggle" role="group" aria-label="View">
         <button data-view-btn="list" aria-pressed="false">List</button>
         <button data-view-btn="timeline" aria-pressed="false">Timeline</button>
       </div>
+    </div>
+    <div id="search-extras">
+      <div class="search-settings" id="search-settings">
+        <label class="semantic-toggle"><input id="semantic-toggle" type="checkbox">Semantic search</label>
+        <button class="search-action" id="search-download" type="button" hidden>Enable semantic search (about 377 MB)</button>
+        <span class="search-status" id="search-status" role="status" aria-live="polite"></span>
+      </div>
+      <progress class="search-progress" id="search-progress" aria-label="Text model download" hidden></progress>
+      <p class="search-count" id="search-count" role="status" aria-live="polite"></p>
     </div>
     <div class="pill-toggle" id="orientation-toggle" role="group" aria-label="Timeline orientation" hidden>
       <button data-orientation-btn="vertical" aria-pressed="false">Vertical</button>
@@ -864,7 +875,10 @@
 
 </div>
 
-<script>
+<script type="module">
+  import { attachSearch, MATCH_LABELS, RESULT_LIMIT } from './search/ui.js';
+  import { linkEntries } from './search/entries.js';
+
   /* =================================================================
      THEME
      ================================================================= */
@@ -916,10 +930,13 @@
   const contentEl = document.getElementById("content");
   const searchEl = document.getElementById("search");
   const searchBoxEl = document.getElementById("search-box");
+  const searchExtrasEl = document.getElementById("search-extras");
   const orientationToggleEl = document.getElementById("orientation-toggle");
 
   let currentTab = "All";
   let currentQuery = "";
+  let searchResults = [];
+  let searchState = "idle";
   let currentView = localStorage.getItem("nxai-links-view") || "list";
   let currentOrientation = localStorage.getItem("nxai-links-timeline-orientation") || "vertical";
   let loadedLinks = null;
@@ -934,6 +951,7 @@
     });
     const isTimeline = view === "timeline";
     searchBoxEl.hidden = isTimeline;
+    searchExtrasEl.hidden = isTimeline;
     tabsEl.hidden = isTimeline;
     orientationToggleEl.hidden = !isTimeline;
     if (loadedLinks) render(loadedLinks);
@@ -958,13 +976,6 @@
   });
   setView(currentView);
   setOrientation(currentOrientation);
-
-  function matchesQuery(item, q){
-    if (!q) return true;
-    const haystack = [item.title, item.meta, item.tag, ...(item.links ? item.links.map(l => l.tag) : [])]
-      .filter(Boolean).join(" ").toLowerCase();
-    return haystack.includes(q);
-  }
 
   function iconEl(iconKey){
     const icon = ICONS[iconKey] || ICONS.article;
@@ -1243,13 +1254,45 @@
       return;
     }
 
-    const q = currentQuery.trim().toLowerCase();
-    const filtered = links.filter(l => matchesQuery(l, q));
+    const q = currentQuery.trim();
+    const resultIds = new Set(searchResults.map(result => result.id));
+    const filtered = q ? links.filter(item => resultIds.has(item.url || item.links[0].url)) : links;
 
     const counts = {};
     MODELS.forEach(m => { counts[MODEL_KEY[m]] = filtered.filter(l => l.model === MODEL_KEY[m]).length; });
 
     renderTabs(currentTab, counts, filtered.length, (label) => { currentTab = label; render(links); });
+
+    if (q){
+      const byId = new Map(links.map(item => [item.url || item.links[0].url, item]));
+      const categoryResults = currentTab === "All" ? searchResults
+        : searchResults.filter(result => result.group === MODEL_KEY[currentTab]);
+      const total = categoryResults.length;
+      document.getElementById("search-count").textContent = total > RESULT_LIMIT
+        ? `Showing ${RESULT_LIMIT} of ${total} matches`
+        : `${total} match${total === 1 ? "" : "es"}`;
+      const grid = document.createElement("div");
+      grid.className = "grid search-query-grid";
+      for (const result of categoryResults.slice(0, RESULT_LIMIT)){
+        const item = byId.get(result.id);
+        if (!item) throw new Error("Search returned an unknown resource: " + result.id);
+        const card = entryEl(item);
+        const match = document.createElement("span");
+        match.className = "search-match";
+        match.textContent = MATCH_LABELS[result.match];
+        card.querySelector(".entry-title").appendChild(match);
+        grid.appendChild(card);
+      }
+      if (grid.children.length){
+        contentEl.appendChild(grid);
+      } else {
+        const empty = document.createElement("div");
+        empty.className = "no-results";
+        empty.textContent = searchEmptyText();
+        contentEl.appendChild(empty);
+      }
+      return;
+    }
 
     if (currentTab === "All"){
       MODELS.forEach(m => {
@@ -1271,6 +1314,12 @@
       empty.textContent = `No entries match "${currentQuery}".`;
       contentEl.appendChild(empty);
     }
+  }
+
+  function searchEmptyText(){
+    return searchState === "loading" || searchState === "searching"
+      ? "No keyword matches yet. Waiting for semantic results…"
+      : `No entries match "${currentQuery}" in this category.`;
   }
 
   /* =================================================================
@@ -1314,9 +1363,14 @@
       loadedLinks = links;
       render(links);
       injectJsonLd(links);
-      searchEl.addEventListener("input", () => {
+      attachSearch(linkEntries(links), (results) => {
         currentQuery = searchEl.value;
+        searchResults = results;
         render(links);
+      }, (info) => {
+        searchState = info.state;
+        const empty = contentEl.querySelector(".no-results");
+        if (empty) empty.textContent = searchEmptyText();
       });
     })
     .catch(err => {

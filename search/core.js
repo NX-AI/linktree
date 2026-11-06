@@ -11,6 +11,10 @@ const RRF_K = 60;
 const STOP = new Set(('a an and are as at be by can do does for from how i in is it of on or ' +
   'the this to use what when where which with').split(' '));
 
+// Field labels such as "Resource type: " belong to the embedding text, not to keyword matching:
+// "model" in "Model family: " would otherwise match every entry.
+const LABEL = /(?:^|\s\|\s)[A-Z][A-Za-z ]{0,30}:\s/g;
+
 export function embeddingTexts(entries) {
   return entries.map((entry) => `title: ${entry.title} | text: ${entry.text}`);
 }
@@ -46,7 +50,7 @@ export function createKeywordIndex(entries) {
   const docs = entries.map((entry) => {
     const counts = new Map();
     const title = tokens(entry.title);
-    const body = tokens(`${entry.text} ${entry.group} ${entry.url}`);
+    const body = tokens(`${entry.text.replace(LABEL, ' ')} ${entry.group} ${entry.url}`);
     for (const term of title) counts.set(term, (counts.get(term) || 0) + 3);
     for (const term of body) counts.set(term, (counts.get(term) || 0) + 1);
     return { counts, length: title.length * 3 + body.length };
@@ -57,11 +61,13 @@ export function createKeywordIndex(entries) {
   return { entries, docs, df, average };
 }
 
-export function keywordSearch(index, query) {
+/** With requireAll, only entries that contain every query term are returned. */
+export function keywordSearch(index, query, { requireAll = false } = {}) {
   const terms = [...new Set(tokens(query))];
   const { docs, df, average } = index;
   const ranked = [];
   docs.forEach((doc, id) => {
+    if (requireAll && !terms.every((term) => doc.counts.has(term))) return;
     let score = 0;
     for (const term of terms) {
       const count = doc.counts.get(term);

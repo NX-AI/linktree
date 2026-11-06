@@ -121,9 +121,13 @@ export function semanticSearch(index, full) {
   return ranked.sort((a, b) => b.score - a.score || a.id - b.id);
 }
 
-export function combine(entries, keyword, semantic = []) {
+/**
+ * Rank by reciprocal rank fusion of the keyword and semantic lists. Ids in `labels` only mark an
+ * entry as a keyword match; they never add entries or change scores or order.
+ */
+export function combine(entries, keyword, semantic = [], labels = []) {
   const scores = new Map();
-  const keywordIds = new Set(keyword.map(({ id }) => id));
+  const keywordIds = new Set([...keyword, ...labels].map(({ id }) => id));
   const semanticIds = new Set(semantic.map(({ id }) => id));
   for (const ranked of [keyword, semantic]) {
     ranked.forEach(({ id }, rank) => scores.set(id, (scores.get(id) || 0) + 1 / (RRF_K + rank + 1)));

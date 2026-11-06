@@ -115,7 +115,11 @@ export function createSearch(entries, { onResults, onStatus }) {
           if (data.id === sentId) { sentId = null; clearDeadline(); }
           if (data.id !== sequence || desiredId !== sequence || !query) return;
           const semantic = semanticSearch(vectorIndex, data.vector);
-          onResults(combine(live, keywordSearch(keywords, query, { requireAll: semantic.length > 0 }), semantic));
+          const keyword = keywordSearch(keywords, query, { requireAll: semantic.length > 0 });
+          // No entry has every word: rank by meaning alone so generic words cannot outrank it,
+          // and keep any-word matches only as labels.
+          const labels = keyword.length ? [] : keywordSearch(keywords, query);
+          onResults(combine(live, keyword, semantic, labels));
           report('ready', { message: 'Semantic search is ready on this device.' });
         } else if (data.type === 'error' && (data.id === undefined || data.id === sequence)) {
           throw new Error(data.message || 'Semantic search failed.');

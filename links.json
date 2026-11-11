@@ -18,6 +18,7 @@
   { "model": "tirex", "type": "model", "icon": "huggingface", "title": "TiRex", "meta": "NX-AI/TiRex", "tag": "Model", "url": "https://huggingface.co/NX-AI/TiRex", "hf": "NX-AI/TiRex" },
   { "model": "tirex", "type": "model", "icon": "huggingface", "title": "TiRex-2", "meta": "NX-AI/TiRex-2", "tag": "Model", "url": "https://huggingface.co/NX-AI/TiRex-2", "hf": "NX-AI/TiRex-2" },
   { "model": "tirex", "type": "paper", "icon": "paper", "title": "TiRex-2: Generalizing TiRex to Multivariate Data and Streaming", "meta": "Podest et al. · NeurIPS 2026", "tag": "2607.01204", "url": "https://arxiv.org/abs/2607.01204", "date": "2026-09", "venue": "NeurIPS" },
+  { "model": "tirex", "type": "paper", "icon": "paper", "title": "The Unused Input: The Initial State as a Conditioning Interface for Recurrent TSFMs", "meta": "Voggenberger et al. · NeurIPS 2026 Workshop", "tag": "2611.14357", "url": "https://arxiv.org/abs/2611.14357", "date": "2026-12", "venue": "NeurIPS" },
   { "model": "tirex", "type": "code", "icon": "book", "title": "TiRex-2 documentation", "meta": "Read the Docs", "tag": "Docs", "url": "https://nx-ai.github.io/tirex-2/" },
   { "model": "tirex", "type": "code", "icon": "github", "title": "TiRex-2 source", "meta": "NX-AI/tirex-2", "tag": "GitHub", "url": "https://github.com/NX-AI/tirex-2", "pypi": "tirex-2" },
   { "model": "tirex", "type": "code", "icon": "docker", "title": "TiRex-2 Docker image", "meta": "Inference container", "tag": "Docker", "url": "https://github.com/NX-AI/tirex-2/blob/main/inference/README.md" },
